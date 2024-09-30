@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import sha1 from 'sha1';
 import dbClient from '../utils/db';
 
 const postNew = async (req, res) => {
@@ -13,7 +13,7 @@ const postNew = async (req, res) => {
   if (user) {
     return res.status(400).json({error: 'Already exist'});
   }
-  const hached = crypto.createHash('sha1').update(password).digest('hex');
+  const hached = sha1(password);
   const newUser = await dbClient.users.insertOne({ email, password: hached });
   return res.status(201).json({
     id: newUser.insertedId,
