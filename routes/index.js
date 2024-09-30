@@ -14,4 +14,4 @@ router.get('/stats', async (req, res) => {
 
 router.post('/users', UsersController.postNew);
 
-module.exports = router;
+export default router;
